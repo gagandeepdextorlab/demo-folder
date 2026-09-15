@@ -11,7 +11,7 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-const createUser = async (req, res) => {
+const registerUser = async (req, res) => {
     const user = new User(req.body);
     try {
         const newUser = await user.save();
@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
         const password = await bcrypt.hash(user.password, 10);
         user.password = password;
         await user.save();
-        
+
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -83,4 +83,4 @@ const deleteUser = async (req, res) => {
 
 
 
-export { getAllUsers, createUser, loginUser, getUserById, updateUser, deleteUser };
+export { getAllUsers, registerUser, loginUser, getUserById, updateUser, deleteUser };
